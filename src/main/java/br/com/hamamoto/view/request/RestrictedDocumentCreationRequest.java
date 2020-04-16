@@ -8,21 +8,27 @@ public class RestrictedDocumentCreationRequest {
     private String document;
     private String user;
 
-    public RestrictedDocumentCreationRequest(DocumentType type, String document, String user) {
-        this.type = type;
-        this.document = document;
-        this.user = user;
-    }
-
     public DocumentType getType() {
         return type;
+    }
+
+    public void setType(DocumentType type) {
+        this.type = type;
     }
 
     public String getDocument() {
         return document;
     }
 
+    public void setDocument(String document) {
+        this.document = document;
+    }
+
     public String getUser() {
         return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 }
