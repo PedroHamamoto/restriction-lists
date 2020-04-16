@@ -43,10 +43,14 @@ public class RestrictedDocumentService {
         var restrictedDocument = new RestrictedDocument();
 
         restrictedDocument.setDocument(request.getDocument());
-        restrictedDocument.setDocumentType(request.getType());
+        restrictedDocument.setType(request.getType());
         restrictedDocument.setUser(request.getUser());
 
         return restrictedDocument;
     }
 
+    public RestrictedDocument findByDocument(String document) {
+        return restrictedDocumentRepository.findByDocument(document)
+                .orElseThrow(() -> new DomainException(RESTRICTED_DOCUMENT_NOT_FOUND));
+    }
 }

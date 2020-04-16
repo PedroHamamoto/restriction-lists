@@ -1,0 +1,7 @@
+{
+  "_id": ObjectId("507f191e810c19729de860ea"),
+  "type": "CPF",
+  "document": "39515268079",
+  "user": "BizzBuzz",
+  "createdAt": ISODate("2012-12-19T06:01:17.171Z")
+}

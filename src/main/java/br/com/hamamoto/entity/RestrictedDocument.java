@@ -12,7 +12,7 @@ public class RestrictedDocument {
 
     @BsonId
     private ObjectId id;
-    private DocumentType documentType;
+    private DocumentType type;
     private String document;
     private LocalDateTime createdAt;
     private String user;
@@ -29,12 +29,12 @@ public class RestrictedDocument {
         this.id = id;
     }
 
-    public DocumentType getDocumentType() {
-        return documentType;
+    public DocumentType getType() {
+        return type;
     }
 
-    public void setDocumentType(DocumentType documentType) {
-        this.documentType = documentType;
+    public void setType(DocumentType type) {
+        this.type = type;
     }
 
     public String getDocument() {

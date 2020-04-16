@@ -9,7 +9,10 @@ import de.flapdoodle.embed.mongo.config.MongodConfigBuilder;
 import de.flapdoodle.embed.mongo.config.Net;
 import de.flapdoodle.embed.mongo.distribution.Version;
 import de.flapdoodle.embed.process.runtime.Network;
+import org.bson.BsonDocument;
+import org.bson.Document;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 
 import javax.inject.Inject;
@@ -33,12 +36,17 @@ public abstract class BaseTest {
         MONGO = MongodStarter.getDefaultInstance().prepare(config);
         try {
             MONGO.start();
-            System.out.println("foo.sout");
         } catch (IOException e) {
 
         }
     }
 
+    @AfterEach
+    void tearDown() {
+        mongoClient.getDatabase("restrictionLists")
+                .getCollection("documentBadList")
+                .deleteMany(new Document());
+    }
 
     @AfterAll
     static void afterAll() {
@@ -53,6 +61,12 @@ public abstract class BaseTest {
         }
 
         return new String(Files.readAllBytes(Paths.get(file.getPath())));
+    }
+
+    public void insertRestrictedDocument(String path) throws IOException {
+        mongoClient.getDatabase("restrictionLists")
+                .getCollection("documentBadList")
+                .insertOne(Document.parse(resource(path)));
     }
 
     private static IMongodConfig buildMongodConfiguration() throws IOException {
